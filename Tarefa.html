@@ -9,7 +9,7 @@
 				}
 			
 		}	
-			function receber1(){
+			function receber(){
 				cont = localStorage.getItem('cont')
    				if(cont == null){cont = 0}else{cont =parseInt(cont)};  
 				let submit = document.getElementById("task").value;
@@ -22,7 +22,7 @@
 				location.reload();
 			}
 
-			function receber() {
+			function carregar() {
                  		cont = parseInt(localStorage.getItem('cont')) + 1;
                     		for(i=0; i < cont;i++){
                        			tarefa =JSON.parse(localStorage.getItem(i))
@@ -80,9 +80,9 @@
 			
 				</style>
 	</head>
-		<body onload="receber()">
+		<body onload="carregar()">
 			<div> Tarefas </div>
-			<input type ='text' id='task' name='task'> 	<button onclick="receber1()">SALVAR</button></br></br>
+			<input type ='text' id='task' name='task'> 	<button onclick="receber()">SALVAR</button></br></br>
 			<table id= "tabela" border='1' >
 				<tr>				
 					<td>Data</td>
