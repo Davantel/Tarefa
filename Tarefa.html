@@ -1,0 +1,84 @@
+<html>
+	<head>
+		<script>
+		class Tarefa{
+			constructor(data, texto) {
+				this.texto = texto;
+				this.data = data;
+				this.status = false;
+				}
+			
+		}	
+			function receber(idTabela) {  
+				let submit = document.getElementById("task").value;
+				let separar = submit.split(" em ");
+				let c = new Tarefa(separar.pop(), separar.pop());
+				var tabela = document.getElementById(idTabela);
+                		var numeroLinhas = tabela.rows.length;
+                		var linha = tabela.insertRow(numeroLinhas);
+                		var celula1 = linha.insertCell(0);
+                		var celula2 = linha.insertCell(1);   
+                		var celula3 = linha.insertCell(2); 
+                		celula1.innerHTML = c.data; 
+                		celula2.innerHTML = c.texto; 
+                		celula3.innerHTML = "<button onclick='removeLinha(this)'>X</button> <button onclick='concluir(this)'>V</button>";
+				document.getElementById("task").value=""
+			}				
+			function removeLinha(linha) {
+              			var i=linha.parentNode.parentNode.rowIndex;
+              			document.getElementById('tabela').deleteRow(i);
+            		}
+	 		function concluir(linha) {
+				var i=linha.parentNode.parentNode.rowIndex;
+				var x = document.getElementById("tabela").rows[i].cells;
+				removeLinha(linha);
+				var tabela = document.getElementById("tabela");
+                		var numeroLinhas = tabela.rows.length;
+                		var novaLinha = tabela.insertRow(numeroLinhas);
+                		var celula1 = novaLinha.insertCell(0);
+                		var celula2 = novaLinha.insertCell(1);   
+                		var celula3 = novaLinha.insertCell(2); 
+				let c = new Tarefa(x[0].innerHTML, x[1].innerHTML);
+                		celula1.innerHTML = c.data; 
+                		celula2.innerHTML = "<del>c.texto</del>"; 
+                		celula3.innerHTML = "Concluida";
+			}
+			</script>
+				<style>
+					.title{
+					text-align:center;
+					color:#FF0000;
+					}
+					
+					input[type="button"]
+					 {
+					 background-color:#00FF00;
+					 color: black;
+					 border: solid black;
+					 width: 100%
+					 }
+					
+					
+					 input[type="text"]
+					 {
+					 background-color:white;
+					 border: solid black ;
+					 }
+
+
+			
+				</style>
+	</head>
+		<body>
+			<div> Tarefas </div>
+			<input type ='text' id='task' name='task'> 	<button onclick="receber('tabela')">SALVAR</button></br></br>
+			<table id= "tabela" border='1' >
+				<tr>				
+					<td>Data</td>
+					<td>Tarefa</td>
+					<td>Botao</td>
+				</tr>
+			</table>
+
+		</body>
+</html>
